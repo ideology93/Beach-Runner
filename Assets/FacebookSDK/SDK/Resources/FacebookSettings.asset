@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2115301841, guid: c49f2b3ca212b47fc9cd8ce655177c89, type: 3}
+  m_Name: FacebookSettings
+  m_EditorClassIdentifier: 
+  selectedAppIndex: 0
+  clientTokens:
+  - GGQVlZAM1RWd1N3LWFDME95ckZAhM0x5U0ZAVRzRqLTd2cmZAJQl9yVGpoc1lFZAW5fUlpxOFN4Q0dPOTkwM0xPYnZArLTZAQUjI0aHBzakE3Q21XVV81TFd3SFpXRnJwVWdxZAFk0TjJRNlpfSThGV0JRc0dkS0lBUjZAKb3h5ZAEFWU2NiQ3FXdwZDZD
+  appIds:
+  - 417719683203511
+  appLabels:
+  - Beach Runner
+  cookie: 1
+  logging: 1
+  status: 1
+  xfbml: 0
+  frictionlessRequests: 1
+  androidKeystorePath: 
+  iosURLSuffix: 
+  appLinkSchemes:
+  - list: []
+  uploadAccessToken: 
+  autoLogAppEventsEnabled: 1
+  advertiserIDCollectionEnabled: 1
