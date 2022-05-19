@@ -15,10 +15,7 @@ public class Tutorial : MonoBehaviour
     public GameObject btn;
 
 
-    public void Update()
-    {
 
-    }
     public void Awake()
     {
         PauseMenu.isPaused = true;

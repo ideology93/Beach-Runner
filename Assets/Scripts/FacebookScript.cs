@@ -2,11 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Facebook.Unity;
 using UnityEngine.UI;
+using System;
 
 public class FacebookScript : MonoBehaviour
 {
-
-    public Text FriendsText;
+    public GameObject loginButton;
+    public GameObject logoutButton;
+    public GameObject shareButton;
+    public GameObject requestButton;
 
     private void Awake()
     {
@@ -16,6 +19,7 @@ public class FacebookScript : MonoBehaviour
             {
                 if (FB.IsInitialized)
                     FB.ActivateApp();
+
                 else
                     Debug.LogError("Couldn't initialize");
             },
@@ -51,6 +55,10 @@ public class FacebookScript : MonoBehaviour
                 Debug.Log(perm);
                 GameAnalyticsInit.OnFacebookLogin("User logged at : ", System.DateTime.Now.Hour);
             }
+            loginButton.SetActive(false);
+            logoutButton.SetActive(true);
+            shareButton.SetActive(true);
+            requestButton.SetActive(true);
         }
         else
         {
@@ -62,20 +70,25 @@ public class FacebookScript : MonoBehaviour
     public void FacebookLogout()
     {
         FB.LogOut();
+        loginButton.SetActive(true);
+        logoutButton.SetActive(false);
+        shareButton.SetActive(false);
+        requestButton.SetActive(false);
     }
     #endregion
 
     public void FacebookShare()
     {
-        FB.ShareLink(new System.Uri("Beach Runner"), "Check it out!",
-            "Test game",
-            new System.Uri("https://dogeseed.com/doge.2214a63a.svg"));
+        FB.ShareLink(
+            new Uri("http://github.com/ideology93/Beach-Runner/"),
+
+            callback: ShareCallback);
     }
 
     #region Inviting
     public void FacebookGameRequest()
     {
-        FB.AppRequest("Hey, try this game!", title: "Beach Runner Test");
+        FB.AppRequest("Hey, try this game!", title: "Beach Runner");
     }
 
     // public void FacebookInvite()
@@ -83,6 +96,27 @@ public class FacebookScript : MonoBehaviour
     //     FB.Mobile.AppInvite(new System.Uri("https://play.google.com/store/apps/details?id=com.tappybyte.byteaway"));
     // }
     #endregion
+    public void Init()
+    {
+        FB.Init();
+        FB.ActivateApp();
+    }
+    private void ShareCallback(IShareResult result)
+    {
+        if (result.Cancelled || !string.IsNullOrEmpty(result.Error))
+        {
+            Debug.Log("ShareLink Error: " + result.Error);
+        }
+        else if (!string.IsNullOrEmpty(result.PostId))
+        {
+            // Print post identifier of the shared content
+            Debug.Log(result.PostId);
+        }
+        else
+        {
+            // Share succeeded without postID
+            Debug.Log("ShareLink success!");
+        }
 
-
+    }
 }
