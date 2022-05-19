@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,11 +24,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerPosition;
     public float rotationSpeed = 720;
     public PauseMenu pause;
-    private float[] lanes = { -2, 0, 2 };
-    float screenCenterX;
+
     float horizontalInput;
-    float leftSide;
-    float rightSide;
+
     public GameObject completeLevelUI;
 
 
@@ -37,33 +34,11 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animate = GetComponent<Animator>();
-        screenCenterX = Screen.width * 0.5f;
-        leftSide = screenCenterX - screenCenterX / 2.8f;
-        rightSide = screenCenterX + screenCenterX / 2.8f;
-        Debug.Log("Left" + leftSide + " right:" + rightSide);
 
-    }
-    public static bool IsPointerOverGameObject()
-    {
-        //check mouse
-        if (EventSystem.current.IsPointerOverGameObject())
-            return true;
-
-        //check touch
-        if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
-        {
-            if (EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId))
-                return true;
-        }
-
-        return false;
     }
     private void Update()
     {
 
-       if(IsPointerOverGameObject()){
-           return;
-       }
         if (transform.position.y < 1.6)
         {
             isGrounded = true;
@@ -132,45 +107,23 @@ public class PlayerController : MonoBehaviour
             animate.SetFloat("Speed", 1f);
 
         }
-        if (Input.touchCount > 0 || Input.GetMouseButton(0))
-        {
-            // get the first one
-            Touch firstTouch = Input.GetTouch(0);
-            // if it began this frame
-            if (firstTouch.phase == TouchPhase.Began)
+       
+
+            Vector3 movementDirection = new Vector3(horizontalInput, 0, 1);
+            float magnitude = Mathf.Clamp01(movementDirection.magnitude * moveSpeed);
+            movementDirection.Normalize();
+            controller.Move(movementDirection * magnitude * moveSpeed * Time.deltaTime);
+            if (movementDirection != Vector3.zero)
             {
-                if (firstTouch.position.x > rightSide)
-                {
-                    horizontalInput = firstTouch.pressure / 1.2f;
-                }
-                else if (firstTouch.position.x < leftSide)
-                {
-                    horizontalInput = -firstTouch.pressure / 1.2f;
-                }
-                else if (isGrounded)
-                {
-                    Jump();
-                }
+                Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime * 500);
             }
-        }
-        else horizontalInput = Input.GetAxis("Horizontal");
-        Vector3 movementDirection = new Vector3(horizontalInput, 0, 1);
-        float magnitude = Mathf.Clamp01(movementDirection.magnitude * moveSpeed);
-        movementDirection.Normalize();
-        controller.Move(movementDirection * magnitude * moveSpeed * Time.deltaTime);
-        if (movementDirection != Vector3.zero)
-        {
-            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime * 500);
-        }
-        //movement
 
-        //gravity
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
 
-        //falling
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
 
+        
 
     }
     private void Jump()
@@ -180,7 +133,17 @@ public class PlayerController : MonoBehaviour
         animate.SetBool("isJumping", true);
         velocity.y += Mathf.Sqrt(jumpHeight * -2 * gravity);
     }
-
-
+    public void MoveLeft()
+    {
+        horizontalInput = 1;
+    }
+    public void MoveRight()
+    {
+        horizontalInput = -1;
+    }
+    public void DontMove()
+    {
+        horizontalInput = 0;
+    }
 }
 

@@ -9,7 +9,7 @@ public class EndButtonsMenuQuit : MonoBehaviour
     public SceneFader sceneFader;
     public TextMeshProUGUI text;
     private string end = "Thank you for trying the Demo!";
-    private float typingSpeed = 0.1f;
+    private float typingSpeed = 0.08f;
     public GameObject menuButton;
     public GameObject quitButton;
 
