@@ -20,11 +20,7 @@ public class Tutorial : MonoBehaviour
     {
         PauseMenu.isPaused = true;
         tutorialUI.SetActive(true);
-        height = Screen.currentResolution.height;
-        width = Screen.currentResolution.width;
-        left.sizeDelta = new Vector2(width / 3, height);
-        right.sizeDelta = new Vector2(width / 3, height);
-        center.sizeDelta = new Vector2(width / 3, height);
+
     }
     public void Hide()
     {
