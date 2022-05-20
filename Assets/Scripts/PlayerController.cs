@@ -107,31 +107,34 @@ public class PlayerController : MonoBehaviour
             animate.SetFloat("Speed", 1f);
 
         }
-       
-
-            Vector3 movementDirection = new Vector3(horizontalInput, 0, 1);
-            float magnitude = Mathf.Clamp01(movementDirection.magnitude * moveSpeed);
-            movementDirection.Normalize();
-            controller.Move(movementDirection * magnitude * moveSpeed * Time.deltaTime);
-            if (movementDirection != Vector3.zero)
-            {
-                Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime * 500);
-            }
-
-            velocity.y += gravity * Time.deltaTime;
-            controller.Move(velocity * Time.deltaTime);
 
 
-        
+        Vector3 movementDirection = new Vector3(horizontalInput, 0, 1);
+        float magnitude = Mathf.Clamp01(movementDirection.magnitude * moveSpeed);
+        movementDirection.Normalize();
+        controller.Move(movementDirection * magnitude * moveSpeed * Time.deltaTime);
+        if (movementDirection != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime * 500);
+        }
+
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+
+
+
 
     }
     private void Jump()
     {
-        jumpTimer = 0.7f;
-        isJumping = true;
-        animate.SetBool("isJumping", true);
-        velocity.y += Mathf.Sqrt(jumpHeight * -2 * gravity);
+        if (isGrounded)
+        {
+            jumpTimer = 0.7f;
+            isJumping = true;
+            animate.SetBool("isJumping", true);
+            velocity.y += Mathf.Sqrt(jumpHeight * -2 * gravity);
+        }
     }
     public void MoveLeft()
     {

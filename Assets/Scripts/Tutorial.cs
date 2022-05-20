@@ -13,6 +13,7 @@ public class Tutorial : MonoBehaviour
     private int width;
     public GameObject tutorialUI;
     public GameObject btn;
+    public Button jump;
 
 
 
@@ -20,12 +21,15 @@ public class Tutorial : MonoBehaviour
     {
         PauseMenu.isPaused = true;
         tutorialUI.SetActive(true);
+        jump.interactable = false;
 
     }
     public void Hide()
     {
+
         tutorialUI.SetActive(false);
         btn.SetActive(false);
+        jump.interactable = true;
         StartCoroutine(Time());
         
 

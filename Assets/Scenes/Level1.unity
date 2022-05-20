@@ -4165,6 +4165,7 @@ MonoBehaviour:
   right: {fileID: 592635486}
   tutorialUI: {fileID: 1564862279}
   btn: {fileID: 951472158}
+  jump: {fileID: 1185401836}
 --- !u!114 &401871746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11549,8 +11550,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -116.6, y: 36}
-  m_SizeDelta: {x: 150.3752, y: 52.3778}
+  m_AnchoredPosition: {x: -102, y: 33.047}
+  m_SizeDelta: {x: 191.29, y: 66.094}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1185401836
 MonoBehaviour:
@@ -21077,7 +21078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3717768102263448002, guid: 8929cacf82a409a438a38a2bc4ea020f, type: 3}
       propertyPath: moveSpeed
-      value: 3.8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3717768102263448002, guid: 8929cacf82a409a438a38a2bc4ea020f, type: 3}
       propertyPath: controller
@@ -21093,7 +21094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3717768102263448002, guid: 8929cacf82a409a438a38a2bc4ea020f, type: 3}
       propertyPath: jumpHeight
-      value: 2.2
+      value: 2.05
       objectReference: {fileID: 0}
     - target: {fileID: 3717768102263448002, guid: 8929cacf82a409a438a38a2bc4ea020f, type: 3}
       propertyPath: completeLevelUI
