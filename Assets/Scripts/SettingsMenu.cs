@@ -20,6 +20,7 @@ public class SettingsMenu : MonoBehaviour
     public AudioSource audioSource;
     public Camera cam;
     public GameObject postProcessing;
+    public Button jumpButton;
 
 
     public void SetVolume(float volume)
@@ -37,8 +38,8 @@ public class SettingsMenu : MonoBehaviour
             case 1:
                 cam.farClipPlane = 50;
                 postProcessing.GetComponent<Volume>().weight = 0;
-                break;
                 lights.shadows = LightShadows.None;
+                break; 
             case 2:
                 cam.farClipPlane = 80;
                 postProcessing.GetComponent<Volume>().weight = 0.5f;
@@ -56,6 +57,7 @@ public class SettingsMenu : MonoBehaviour
     public void Toggle()
     {
         btn.interactable = false;
+        jumpButton.interactable = false;
         ui.SetActive(!ui.activeSelf);
 
         if (ui.activeSelf)
@@ -67,6 +69,8 @@ public class SettingsMenu : MonoBehaviour
         {
             isPaused = false;
             Time.timeScale = 1f;
+            btn.interactable = true;
+            jumpButton.interactable = true;
         }
     }
     public void Retry()

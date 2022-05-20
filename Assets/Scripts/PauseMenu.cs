@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
     public SceneFader sceneFader;
     public GameObject ui;
     public Button btn;
+    public Button jumpButton;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
@@ -21,6 +22,7 @@ public class PauseMenu : MonoBehaviour
     {
 
         btn.interactable = false;
+        jumpButton.interactable = false;
 
         ui.SetActive(!ui.activeSelf);
 
@@ -34,6 +36,7 @@ public class PauseMenu : MonoBehaviour
             isPaused = false;
             Time.timeScale = 1f;
             btn.interactable = true;
+            jumpButton.interactable = true;
         }
     }
     public void Retry()

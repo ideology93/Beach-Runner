@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Jump()
     {
-        if (isGrounded)
+        if (isGrounded && !PauseMenu.isPaused)
         {
             jumpTimer = 0.7f;
             isJumping = true;

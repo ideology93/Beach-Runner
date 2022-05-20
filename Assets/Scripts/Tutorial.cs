@@ -32,8 +32,6 @@ public class Tutorial : MonoBehaviour
         jump.interactable = true;
         StartCoroutine(Time());
         
-
-
     }
     IEnumerator Time()
     {

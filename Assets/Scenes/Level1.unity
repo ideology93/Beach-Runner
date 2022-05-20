@@ -4131,6 +4131,7 @@ MonoBehaviour:
   sceneFader: {fileID: 344905396}
   ui: {fileID: 352493242}
   btn: {fileID: 202712969}
+  jumpButton: {fileID: 1185401836}
 --- !u!114 &401871744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4185,6 +4186,7 @@ MonoBehaviour:
   audioSource: {fileID: 193794542}
   cam: {fileID: 92047314}
   postProcessing: {fileID: 827195324}
+  jumpButton: {fileID: 1185401836}
 --- !u!82 &401871747
 AudioSource:
   m_ObjectHideFlags: 0
